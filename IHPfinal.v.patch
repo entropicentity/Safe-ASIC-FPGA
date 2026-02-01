@@ -1,0 +1,60 @@
+--- a/src/IHPfinal.v
++++ b/src/IHPfinal.v
+@@ -18,20 +18,24 @@ module tt_um_entropicentity_Safe_ASIC (
+     input  wire       rst_n     // reset_n - low to reset
+ );
+ 
+-  // All output pins must be assigned. If not used, assign to 0.
+-  assign uo_out  = 0;
+-  assign uio_oe  = 8'b00111111; // uio[5:0] are outputs, uio[7:6] are inputs
++  // Assign dedicated outputs (lock, green, blue moved here from bidirectional pins)
++  assign uo_out[0] = lock;
++  assign uo_out[1] = green;
++  assign uo_out[2] = blue;
++  assign uo_out[7:3] = 5'b00000;
++  assign uio_oe  = 8'b00000111; // uio[2:0] are outputs (keypad columns), uio[7:3] configured as inputs (uio[7:4] used for keypad rows, uio[3] unused)
+ 
+   // Internal wires
+   wire c1, c2;              // Alternating clocks from clockboss
+   wire lock, green, blue;   // Safe control outputs
+   wire [3:0] dataline;      // Data from membranedriver to safecontrol
++  wire keypad_col0, keypad_col1, keypad_col2;  // Keypad column outputs from membranedriver
+ 
+-  // Assign outputs
+-  assign uio_out[3] = lock;
+-  assign uio_out[4] = green;
+-  assign uio_out[5] = blue;
+-  assign uio_out[7:6] = 2'b00;
++  // Assign bidirectional outputs
++  assign uio_out[0] = keypad_col0;
++  assign uio_out[1] = keypad_col1;
++  assign uio_out[2] = keypad_col2;
++  assign uio_out[7:3] = 5'b00000;  // uio[7:4] used as inputs (keypad rows), uio[3] unused; output values don't matter when configured as inputs
+ 
+   // List all unused inputs to prevent warnings
+   wire _unused = &{ui_in, ena, 1'b0};
+@@ -45,16 +49,17 @@ module tt_um_entropicentity_Safe_ASIC (
+   );
+ 
+   // Keypad scanner - scans matrix keypad and outputs digit codes
++  // Changed inputs from uio_in[3:0] to uio_in[7:4] to avoid conflict with outputs
+   membranedriver u_membranedriver (
+     .clk(c1),
+     .rst(rst_n),
+-    .in0(uio_in[0]),
+-    .in1(uio_in[1]),
+-    .in2(uio_in[2]),
+-    .in3(uio_in[3]),
+-    .out0(uio_out[0]),
+-    .out1(uio_out[1]),
+-    .out2(uio_out[2]),
++    .in0(uio_in[4]),
++    .in1(uio_in[5]),
++    .in2(uio_in[6]),
++    .in3(uio_in[7]),
++    .out0(keypad_col0),
++    .out1(keypad_col1),
++    .out2(keypad_col2),
+     .data_out(dataline)
+   );
+ 

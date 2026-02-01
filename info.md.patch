@@ -1,0 +1,20 @@
+--- a/docs/info.md
++++ b/docs/info.md
+@@ -34,13 +34,13 @@ if you put in the right code, the solenoid will open, the lights will switch, an
+ 
+ ## How to test
+ 
+-Connect the first four inputs to the signals from the four rows in order of the membrane keypad
++Connect the bidirectional I/O pins 4-7 (uio[4:7]) to the signals from the four rows in order of the membrane keypad
+ 
+-connect the first three outputs to the first or only three columns of the membrane keypad
++connect the bidirectional I/O pins 0-2 (uio[0:2]) to the first or only three columns of the membrane keypad
+ 
+-connect the fourth output to the power transistor driving the solenoid
++connect the first output pin (uo[0]) to the power transistor driving the solenoid
+ 
+-connect the fifth and sixth output pins to the green and blue LEDs respectively
++connect the second and third output pins (uo[1] and uo[2]) to the green and blue LEDs respectively
+ ## External hardware
+ 
+ a 3x4 or 4x4 standard membrane keypad (if using 4x4 the 4th column is unused)

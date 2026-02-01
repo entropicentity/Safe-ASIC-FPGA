@@ -1,0 +1,54 @@
+--- a/info.yaml
++++ b/info.yaml
+@@ -26,34 +26,34 @@ project:
+ # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+ pinout:
+   # Inputs
+-  ui[0]: "1st row keypad connection"
+-  ui[1]: "2nd row keypad connection"
+-  ui[2]: "3rd row keypad connection"
+-  ui[3]: "4th row keypad connection"
++  ui[0]: ""
++  ui[1]: ""
++  ui[2]: ""
++  ui[3]: ""
+   ui[4]: ""
+   ui[5]: ""
+   ui[6]: ""
+   ui[7]: ""
+ 
+   # Outputs
+-  uo[0]: "1st column keypad connection"
+-  uo[1]: "2nd column keypad connection"
+-  uo[2]: "3rd column keypad connection"
+-  uo[3]: "lock"
+-  uo[4]: "green"
+-  uo[5]: "blue"
++  uo[0]: "lock"
++  uo[1]: "green"
++  uo[2]: "blue"
++  uo[3]: ""
++  uo[4]: ""
++  uo[5]: ""
+   uo[6]: ""
+   uo[7]: ""
+ 
+   # Bidirectional pins
+-  uio[0]: ""
+-  uio[1]: ""
+-  uio[2]: ""
++  uio[0]: "1st column keypad connection"
++  uio[1]: "2nd column keypad connection"
++  uio[2]: "3rd column keypad connection"
+   uio[3]: ""
+-  uio[4]: ""
+-  uio[5]: ""
+-  uio[6]: ""
+-  uio[7]: ""
++  uio[4]: "1st row keypad connection"
++  uio[5]: "2nd row keypad connection"
++  uio[6]: "3rd row keypad connection"
++  uio[7]: "4th row keypad connection"
+ 
+ # Do not change!
+ yaml_version: 6
